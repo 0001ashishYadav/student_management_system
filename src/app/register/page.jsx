@@ -1,9 +1,9 @@
 "use client";
 
+import { PageFooter } from "@/component/registration/PageFooter";
+import { PageHeader } from "@/component/registration/PageHeader";
+import RegistrationForm from "@/component/registration/RegistrationForm";
 import { useEffect } from "react";
-import { RegistrationForm } from "@/components/registration/RegistrationForm";
-import { PageHeader } from "@/components/registration/PageHeader";
-import { PageFooter } from "@/components/registration/PageFooter";
 
 export default function RegisterPage() {
   useEffect(() => {
@@ -29,8 +29,8 @@ export default function RegisterPage() {
       <div className="container mx-auto px-4 py-8 relative z-10">
         <PageHeader />
 
-        <main className="flex justify-center items-center py-8">
-          <div className="w-full max-w-4xl">
+        <main className="flex justify-center items-center rounded shadow-2xl overflow-hidden my-10">
+          <div className="w-full">
             <RegistrationForm />
           </div>
         </main>
