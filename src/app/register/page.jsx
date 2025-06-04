@@ -30,9 +30,7 @@ export default function RegisterPage() {
         <PageHeader />
 
         <main className="flex justify-center items-center rounded shadow-2xl overflow-hidden my-10">
-          <div className="w-full">
-            <RegistrationForm />
-          </div>
+          <RegistrationForm />
         </main>
 
         <PageFooter />
