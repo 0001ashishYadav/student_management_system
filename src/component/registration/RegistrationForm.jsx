@@ -9,6 +9,7 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [passwordStrength, setPasswordStrength] = useState(0);
+  const [profileImage, setProfileImage] = useState(null);
   const stepIndData = [
     {
       step: 1,
@@ -41,6 +42,17 @@ const RegistrationForm = () => {
     // form.setValue("password", password);
     setPassword(pass);
     setPasswordStrength(calculatePasswordStrength(pass));
+  };
+
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -114,16 +126,32 @@ const RegistrationForm = () => {
               <MyInput type="number" placeholder="Enter your contact number" />
             </div>
 
-            <div className="flex justify-center items-center">
-              <div className="h-[160px] w-[160px] border-2 border-dashed border-gray-500 rounded-full flex justify-center items-center">
-                <div className="text-gray-500">
-                  <div className="flex justify-center items-center">
-                    <Upload size={30} />
+            <div className="flex flex-col items-center space-y-4">
+              <div className="relative w-32 h-32 rounded-full border-2 border-dashed border-gray-300 hover:border-blue-500 transition-colors duration-200 group cursor-pointer overflow-hidden bg-gray-50">
+                {profileImage ? (
+                  <img
+                    src={profileImage}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 group-hover:text-blue-500 transition-colors duration-200">
+                    <Upload className="h-8 w-8" />
+                    <span className="text-xs mt-1">Upload Photo</span>
                   </div>
-
-                  <p className=" text-sm"> upload photo</p>
-                </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfileImageChange}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                />
               </div>
+              <p className="text-sm text-gray-500">
+                {profileImage
+                  ? "Click to change photo"
+                  : "Upload a profile photo"}
+              </p>
             </div>
           </>
         )}
